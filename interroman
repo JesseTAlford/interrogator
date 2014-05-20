@@ -35,6 +35,7 @@ INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
 INTERROGATOR_INSTANCES=$(jq '.instances' /tmp/interrogator/app.json)
 INTERROGATOR_MEMORY=$(jq '.memory' /tmp/interrogator/app.json)
 INTERROGATOR_HOST=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .host')
+INTERROGATOR_DOMAIN=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .domain.name')
 
 # Initialize a manifest file and write the app details to it
 echo '---' > $INTERROGATOR_MANIFEST
@@ -43,3 +44,10 @@ echo "- name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
 echo "  instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
 echo "  memory: ${INTERROGATOR_MEMORY}M" >> $INTERROGATOR_MANIFEST
 echo "  host: $INTERROGATOR_HOST" >> $INTERROGATOR_MANIFEST
+echo "  domain: $INTERROGATOR_DOMAIN" >> $INTERROGATOR_MANIFEST
+
+# Output created manifest
+cat $INTERROGATOR_MANIFEST
+
+## Known limitations:
+# Manifests only support one route. Interrogator will only capture an app's first route.
