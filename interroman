@@ -4,7 +4,7 @@
 set -e
 
 # Display Commands/dev-mode
-set -x
+# set -x
 
 # Take app name as an argument:
 NAME=$1
