@@ -11,16 +11,13 @@ NAME=$1
 ORG=$2
 SPACE=$3
 
-# Verify the presence of the cli and note the version
-cf --version
-
 # Set CF to use a seperate config file 
 export CF_HOME=/tmp/interrogator
 
 # Login and target the app's space
-cf api api.staging.cf-app.com
-cf auth interrogator interrogator
-cf target -o $ORG -s $SPACE
+cf api api.staging.cf-app.com > /dev/null
+cf auth interrogator interrogator > /dev/null
+cf target -o $ORG -s $SPACE > /dev/null
 
 # Get the app's name, instances, quota, and routes
 # and store them as json
