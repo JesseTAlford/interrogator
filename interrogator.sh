@@ -6,6 +6,9 @@ set -e
 # Display Commands/dev-mode
 set -x
 
+# Take app name as an argument:
+NAME=$1
+
 # Verify the presence of the cli and note the version
 cf --version
 
@@ -19,10 +22,10 @@ cf target -o jesse -s jesse
 
 # Get the app's name, instances, quota, and routes
 # and store them as a text file
-cf app dora > /tmp/interrogator/interrogator_cf_app.txt
+cf app $NAME > /tmp/interrogator/interrogator_cf_app.txt
 
 # Assign them to env vars
-INTERROGATOR_APP_NAME='dora'
+INTERROGATOR_APP_NAME="$NAME"
 INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
 
 # Initialize a manifest file and write the app details to it
