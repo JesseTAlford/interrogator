@@ -29,8 +29,10 @@ cf app $NAME > /tmp/interrogator/interrogator_cf_app.txt
 # Assign them to env vars
 INTERROGATOR_APP_NAME="$NAME"
 INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
+INTERROGATOR_INSTANCES=$(grep instances: /tmp/interrogator/interrogator_cf_app.txt | awk '{print substr ($0,length,1)}')
 
 # Initialize a manifest file and write the app details to it
 rm -f $INTERROGATOR_MANIFEST
 echo '---' >> $INTERROGATOR_MANIFEST
 echo "name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
+echo "instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
