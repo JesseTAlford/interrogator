@@ -24,8 +24,8 @@ cf target -o $ORG -s $SPACE > /dev/null
 CF_TRACE=true cf app $NAME | grep ',"name":' > /tmp/interrogator/app.json
 
 # Assign them to env vars
-INTERROGATOR_APP_NAME=$(jq '.name' /tmp/interrogator/app.json)
-INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
+# Core Maifest Attributes:
+INTERROGATOR_APP_NAME=$(jq -r '.name' /tmp/interrogator/app.json)
 # Saved for posterity so you can see how insane this was before going after the JSON:
 # INTERROGATOR_INSTANCES=$(grep instances: /tmp/interrogator/interrogator_cf_app_with_trace.txt | awk '{print substr ($0,length,1)}')
 # Now the sane way:
@@ -34,7 +34,12 @@ INTERROGATOR_MEMORY=$(jq '.memory' /tmp/interrogator/app.json)
 INTERROGATOR_HOST=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .host')
 INTERROGATOR_DOMAIN=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .domain.name')
 
+# Optional Manifest Attributes:
+INTERROGATOR_COMMAND=$(jq '.command' /tmp/interrogator/app.json)
+
 # Initialize a manifest file and write the app details to it
+INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
+#Core manifest attributes:
 echo '---' > $INTERROGATOR_MANIFEST
 echo 'applications:' >> $INTERROGATOR_MANIFEST
 echo "- name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
@@ -42,6 +47,12 @@ echo "  instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
 echo "  memory: ${INTERROGATOR_MEMORY}M" >> $INTERROGATOR_MANIFEST
 echo "  host: $INTERROGATOR_HOST" >> $INTERROGATOR_MANIFEST
 echo "  domain: $INTERROGATOR_DOMAIN" >> $INTERROGATOR_MANIFEST
+
+#Optional manifest attributes:
+
+if [[ $INTERROGATOR_COMMAND != null ]]; then
+    echo "  command: $INTERROGATOR_COMMAND" >> $INTERROGATOR_MANIFEST
+fi
 
 # Output created manifest
 cat $INTERROGATOR_MANIFEST
