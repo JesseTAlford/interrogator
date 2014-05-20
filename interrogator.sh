@@ -23,16 +23,21 @@ cf auth interrogator interrogator
 cf target -o $ORG -s $SPACE
 
 # Get the app's name, instances, quota, and routes
-# and store them as a text file
-cf app $NAME > /tmp/interrogator/interrogator_cf_app.txt
+# and store them as json
+CF_TRACE=true cf app $NAME | grep ',"name":' > /tmp/interrogator/app.json
 
 # Assign them to env vars
 INTERROGATOR_APP_NAME="$NAME"
 INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
-INTERROGATOR_INSTANCES=$(grep instances: /tmp/interrogator/interrogator_cf_app.txt | awk '{print substr ($0,length,1)}')
+# Saved for posterity so you can see how insane this was before going after the JSON:
+# INTERROGATOR_INSTANCES=$(grep instances: /tmp/interrogator/interrogator_cf_app_with_trace.txt | awk '{print substr ($0,length,1)}')
+# Now the sane way:
+INTERROGATOR_INSTANCES=$(jq '.instances' /tmp/interrogator/app.json)
+INTERROGATOR_MEMORY=$(jq '.memory' /tmp/interrogator/app.json)
 
 # Initialize a manifest file and write the app details to it
-rm -f $INTERROGATOR_MANIFEST
-echo '---' >> $INTERROGATOR_MANIFEST
-echo "name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
-echo "instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
+echo '---' > $INTERROGATOR_MANIFEST
+echo 'applications:' >> $INTERROGATOR_MANIFEST
+echo "- name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
+echo "  instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
+echo "  memory: ${INTERROGATOR_MEMORY}M" >> $INTERROGATOR_MANIFEST
