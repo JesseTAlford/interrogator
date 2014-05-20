@@ -31,6 +31,7 @@ INTERROGATOR_APP_NAME=$(jq -r '.name' /tmp/interrogator/app.json)
 # Now the sane way:
 INTERROGATOR_INSTANCES=$(jq '.instances' /tmp/interrogator/app.json)
 INTERROGATOR_MEMORY=$(jq '.memory' /tmp/interrogator/app.json)
+INTERROGATOR_DISK=$(jq '.disk_quota' /tmp/interrogator/app.json)
 INTERROGATOR_HOST=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .host')
 INTERROGATOR_DOMAIN=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .domain.name')
 
@@ -45,17 +46,14 @@ echo 'applications:' >> $INTERROGATOR_MANIFEST
 echo "- name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
 echo "  instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
 echo "  memory: ${INTERROGATOR_MEMORY}M" >> $INTERROGATOR_MANIFEST
+echo "  disk_quota: ${INTERROGATOR_MEMORY}M" >> $INTERROGATOR_MANIFEST
 echo "  host: $INTERROGATOR_HOST" >> $INTERROGATOR_MANIFEST
 echo "  domain: $INTERROGATOR_DOMAIN" >> $INTERROGATOR_MANIFEST
 
 #Optional manifest attributes:
-
 if [[ $INTERROGATOR_COMMAND != null ]]; then
     echo "  command: $INTERROGATOR_COMMAND" >> $INTERROGATOR_MANIFEST
 fi
 
 # Output created manifest
 cat $INTERROGATOR_MANIFEST
-
-## Known limitations:
-# Manifests only support one route. Interrogator will only capture an app's first route.
