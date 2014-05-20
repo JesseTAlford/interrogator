@@ -24,7 +24,7 @@ cf target -o $ORG -s $SPACE > /dev/null
 CF_TRACE=true cf app $NAME | grep ',"name":' > /tmp/interrogator/app.json
 
 # Assign them to env vars
-INTERROGATOR_APP_NAME="$NAME"
+INTERROGATOR_APP_NAME=$(jq '.name' /tmp/interrogator/app.json)
 INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
 # Saved for posterity so you can see how insane this was before going after the JSON:
 # INTERROGATOR_INSTANCES=$(grep instances: /tmp/interrogator/interrogator_cf_app_with_trace.txt | awk '{print substr ($0,length,1)}')
