@@ -34,6 +34,7 @@ INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
 # Now the sane way:
 INTERROGATOR_INSTANCES=$(jq '.instances' /tmp/interrogator/app.json)
 INTERROGATOR_MEMORY=$(jq '.memory' /tmp/interrogator/app.json)
+INTERROGATOR_HOST=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .host')
 
 # Initialize a manifest file and write the app details to it
 echo '---' > $INTERROGATOR_MANIFEST
@@ -41,3 +42,4 @@ echo 'applications:' >> $INTERROGATOR_MANIFEST
 echo "- name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
 echo "  instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
 echo "  memory: ${INTERROGATOR_MEMORY}M" >> $INTERROGATOR_MANIFEST
+echo "  host: $INTERROGATOR_HOST" >> $INTERROGATOR_MANIFEST
