@@ -50,11 +50,20 @@ echo "- name: $INTERROGATOR_APP_NAME" >> $INTERROGATOR_MANIFEST
 echo "  instances: $INTERROGATOR_INSTANCES" >> $INTERROGATOR_MANIFEST
 echo "  memory: ${INTERROGATOR_MEMORY}M" >> $INTERROGATOR_MANIFEST
 echo "  disk_quota: ${INTERROGATOR_DISK}M" >> $INTERROGATOR_MANIFEST
-echo "  host: $INTERROGATOR_HOST" >> $INTERROGATOR_MANIFEST
-echo "  domain: $INTERROGATOR_DOMAIN" >> $INTERROGATOR_MANIFEST
-
 
 #Optional manifest attributes:
+if [[ $INTERROGATOR_HOST != null ]]; then
+    echo "  timeout: $INTERROGATOR_HOST" >> $INTERROGATOR_MANIFEST
+fi
+
+if [[ $INTERROGATOR_DOMAIN != null ]]; then
+    echo "  timeout: $INTERROGATOR_DOMAIN" >> $INTERROGATOR_MANIFEST
+fi
+
+if [[ $INTERROGATOR_DOMAIN = null ]]; then
+    echo "  no-route: true" >> $INTERROGATOR_MANIFEST
+fi
+
 if [[ $INTERROGATOR_COMMAND != null ]]; then
     echo "  command: $INTERROGATOR_COMMAND" >> $INTERROGATOR_MANIFEST
 fi
