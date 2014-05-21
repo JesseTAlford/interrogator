@@ -38,6 +38,7 @@ INTERROGATOR_DOMAIN=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .doma
 # Optional Manifest Attributes:
 INTERROGATOR_COMMAND=$(jq '.command' /tmp/interrogator/app.json)
 INTERROGATOR_BUILDPACK=$(jq '.buildpack' /tmp/interrogator/app.json)
+INTERROGATOR_TIMEOUT=$(jq '.health_check_timeout' /tmp/interrogator/app.json)
 
 # Initialize a manifest file and write the app details to it
 INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
@@ -51,12 +52,18 @@ echo "  disk_quota: ${INTERROGATOR_DISK}M" >> $INTERROGATOR_MANIFEST
 echo "  host: $INTERROGATOR_HOST" >> $INTERROGATOR_MANIFEST
 echo "  domain: $INTERROGATOR_DOMAIN" >> $INTERROGATOR_MANIFEST
 
+
 #Optional manifest attributes:
 if [[ $INTERROGATOR_COMMAND != null ]]; then
     echo "  command: $INTERROGATOR_COMMAND" >> $INTERROGATOR_MANIFEST
 fi
+
 if [[ $INTERROGATOR_BUILDPACK != null ]]; then
     echo "  buildpack: $INTERROGATOR_BUILDPACK" >> $INTERROGATOR_MANIFEST
+fi
+
+if [[ $INTERROGATOR_TIMEOUT != null ]]; then
+    echo "  timeout: $INTERROGATOR_TIMEOUT" >> $INTERROGATOR_MANIFEST
 fi
 
 # Output created manifest
