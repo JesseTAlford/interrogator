@@ -1,0 +1,200 @@
+
+VERSION:
+6.1.2-80182c4
+
+
+REQUEST: [2014-05-30T14:17:11-07:00]
+GET /v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/apps?q=name%3AhelloNode&inline-relations-depth=1 HTTP/1.1
+Host: api.staging.cf-app.com
+Accept: application/json
+Authorization: [PRIVATE DATA HIDDEN]
+Content-Type: application/json
+User-Agent: go-cli 6.1.2-80182c4 / darwin
+
+
+
+RESPONSE: [2014-05-30T14:17:12-07:00]
+HTTP/1.1 200 OK
+Content-Length: 4025
+Connection: keep-alive
+Content-Type: application/json;charset=utf-8
+Date: Fri, 30 May 2014 21:17:12 GMT
+Server: nginx
+X-Content-Type-Options: nosniff
+X-Vcap-Request-Id: 2c115d77-7fb7-4ae7-6c1a-7da1ff250055::bb0da380-09be-432a-830a-b3236b7abce8
+
+{
+  "total_results": 1,
+  "total_pages": 1,
+  "prev_url": null,
+  "next_url": null,
+  "resources": [
+    {
+      "metadata": {
+        "guid": "ebe4b183-ba4e-4378-bf32-55f5b3ae1c80",
+        "url": "/v2/apps/ebe4b183-ba4e-4378-bf32-55f5b3ae1c80",
+        "created_at": "2014-05-20T23:56:22+00:00",
+        "updated_at": "2014-05-21T00:20:24+00:00"
+      },
+      "entity": {
+        "name": "helloNode",
+        "production": false,
+        "space_guid": "2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+        "stack_guid": "71bef9c4-d495-4aa8-93a9-bd42728e4045",
+        "buildpack": "nodejs_buildpack",
+        "detected_buildpack": null,
+        "environment_json": {
+          "ENVVAR": "ENVVAL"
+        },
+        "memory": 125,
+        "instances": 2,
+        "disk_quota": 100,
+        "state": "STARTED",
+        "version": "8a221424-81aa-4464-822e-fd823b67d839",
+        "command": "node app.js",
+        "console": false,
+        "debug": null,
+        "staging_task_id": "241445eeeca54a84a1fad245785eed61",
+        "package_state": "STAGED",
+        "health_check_timeout": 100,
+        "space_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+        "space": {
+          "metadata": {
+            "guid": "2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+            "url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+            "created_at": "2014-05-20T22:56:51+00:00",
+            "updated_at": null
+          },
+          "entity": {
+            "name": "example-space",
+            "organization_guid": "3c51411d-dd2f-45e3-b9c3-17029783d775",
+            "organization_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775",
+            "developers_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/developers",
+            "managers_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/managers",
+            "auditors_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/auditors",
+            "apps_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/apps",
+            "routes_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/routes",
+            "domains_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/domains",
+            "service_instances_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/service_instances",
+            "app_events_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/app_events",
+            "events_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/events"
+          }
+        },
+        "stack_url": "/v2/stacks/71bef9c4-d495-4aa8-93a9-bd42728e4045",
+        "stack": {
+          "metadata": {
+            "guid": "71bef9c4-d495-4aa8-93a9-bd42728e4045",
+            "url": "/v2/stacks/71bef9c4-d495-4aa8-93a9-bd42728e4045",
+            "created_at": "2014-04-24T23:08:57+00:00",
+            "updated_at": null
+          },
+          "entity": {
+            "name": "lucid64",
+            "description": "Ubuntu 10.04 on x86-64"
+          }
+        },
+        "service_bindings_url": "/v2/apps/ebe4b183-ba4e-4378-bf32-55f5b3ae1c80/service_bindings",
+        "service_bindings": [
+
+        ],
+        "routes_url": "/v2/apps/ebe4b183-ba4e-4378-bf32-55f5b3ae1c80/routes",
+        "routes": [
+          {
+            "metadata": {
+              "guid": "17ad6177-a51b-46dc-b994-61a6d431ac1f",
+              "url": "/v2/routes/17ad6177-a51b-46dc-b994-61a6d431ac1f",
+              "created_at": "2014-05-20T23:06:05+00:00",
+              "updated_at": null
+            },
+            "entity": {
+              "host": "nodeHost",
+              "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+              "space_guid": "2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+              "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+              "space_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+              "apps_url": "/v2/routes/17ad6177-a51b-46dc-b994-61a6d431ac1f/apps"
+            }
+          }
+        ],
+        "events_url": "/v2/apps/ebe4b183-ba4e-4378-bf32-55f5b3ae1c80/events"
+      }
+    }
+  ]
+}
+Showing health and status for app helloNode in org example-org / space example-space as admin...
+
+REQUEST: [2014-05-30T14:17:12-07:00]
+GET /v2/apps/ebe4b183-ba4e-4378-bf32-55f5b3ae1c80/summary HTTP/1.1
+Host: api.staging.cf-app.com
+Accept: application/json
+Authorization: [PRIVATE DATA HIDDEN]
+Content-Type: application/json
+User-Agent: go-cli 6.1.2-80182c4 / darwin
+
+
+
+RESPONSE: [2014-05-30T14:17:12-07:00]
+HTTP/1.1 200 OK
+Content-Length: 869
+Connection: keep-alive
+Content-Type: application/json;charset=utf-8
+Date: Fri, 30 May 2014 21:17:12 GMT
+Server: nginx
+X-Content-Type-Options: nosniff
+X-Vcap-Request-Id: bdb10690-320a-4e70-4ecf-8a7824312a7d::6a2f2585-f815-4039-a725-d9b192cb93b1
+
+{"guid":"ebe4b183-ba4e-4378-bf32-55f5b3ae1c80","name":"helloNode","routes":[{"guid":"17ad6177-a51b-46dc-b994-61a6d431ac1f","host":"nodeHost","domain":{"guid":"a5be223f-d298-457c-b5ac-d1ef290a4162","name":"staging.cf-app.com"}}],"running_instances":2,"services":[],"available_domains":[{"guid":"a5be223f-d298-457c-b5ac-d1ef290a4162","name":"staging.cf-app.com"}],"name":"helloNode","production":false,"space_guid":"2f6ee8ad-0494-4eff-b12f-197aad08f75c","stack_guid":"71bef9c4-d495-4aa8-93a9-bd42728e4045","buildpack":"nodejs_buildpack","detected_buildpack":null,"environment_json":{"ENVVAR":"ENVVAL"},"memory":125,"instances":2,"disk_quota":100,"state":"STARTED","version":"8a221424-81aa-4464-822e-fd823b67d839","command":"node app.js","console":false,"debug":null,"staging_task_id":"241445eeeca54a84a1fad245785eed61","package_state":"STAGED","health_check_timeout":100}
+
+REQUEST: [2014-05-30T14:17:12-07:00]
+GET /v2/apps/ebe4b183-ba4e-4378-bf32-55f5b3ae1c80/instances HTTP/1.1
+Host: api.staging.cf-app.com
+Accept: application/json
+Authorization: [PRIVATE DATA HIDDEN]
+Content-Type: application/json
+User-Agent: go-cli 6.1.2-80182c4 / darwin
+
+
+
+RESPONSE: [2014-05-30T14:17:13-07:00]
+HTTP/1.1 200 OK
+Content-Length: 247
+Connection: keep-alive
+Content-Type: application/json;charset=utf-8
+Date: Fri, 30 May 2014 21:17:13 GMT
+Server: nginx
+X-Content-Type-Options: nosniff
+X-Vcap-Request-Id: 48880c8b-58aa-4e1e-55d9-31fe23a1de08::d321a79e-3795-4147-bcd2-bca262e0240c
+
+{"1":{"state":"RUNNING","since":1401192777.8813636,"debug_ip":null,"debug_port":null,"console_ip":null,"console_port":null},"0":{"state":"RUNNING","since":1401193096.6036248,"debug_ip":null,"debug_port":null,"console_ip":null,"console_port":null}}
+
+REQUEST: [2014-05-30T14:17:13-07:00]
+GET /v2/apps/ebe4b183-ba4e-4378-bf32-55f5b3ae1c80/stats HTTP/1.1
+Host: api.staging.cf-app.com
+Accept: application/json
+Authorization: [PRIVATE DATA HIDDEN]
+Content-Type: application/json
+User-Agent: go-cli 6.1.2-80182c4 / darwin
+
+
+
+RESPONSE: [2014-05-30T14:17:13-07:00]
+HTTP/1.1 200 OK
+Content-Length: 583
+Connection: keep-alive
+Content-Type: application/json;charset=utf-8
+Date: Fri, 30 May 2014 21:17:13 GMT
+Server: nginx
+X-Content-Type-Options: nosniff
+X-Vcap-Request-Id: 144d8ab9-3ed8-475e-569a-476ad28970c2::b6c6b8a4-41f4-4acb-87f6-62e9178180c8
+
+{"1":{"state":"RUNNING","stats":{"name":"helloNode","uris":["nodeHost.staging.cf-app.com"],"host":"10.10.81.25","port":61003,"uptime":291858,"mem_quota":131072000,"disk_quota":104857600,"fds_quota":16384,"usage":{"time":"2014-05-30 21:17:13 +0000","cpu":0.0,"mem":12562432,"disk":22855680}}},"0":{"state":"RUNNING","stats":{"name":"helloNode","uris":["nodeHost.staging.cf-app.com"],"host":"10.10.17.33","port":61003,"uptime":291538,"mem_quota":131072000,"disk_quota":104857600,"fds_quota":16384,"usage":{"time":"2014-05-30 21:17:13 +0000","cpu":0.0,"mem":12337152,"disk":22855680}}}}
+OK
+
+requested state: started
+instances: 2/2
+usage: 125M x 2 instances
+urls: nodeHost.staging.cf-app.com
+
+     state     since                    cpu    memory          disk   
+#0   running   2014-05-27 05:18:16 AM   0.0%   11.8M of 125M   21.8M of 100M   
+#1   running   2014-05-27 05:12:57 AM   0.0%   12M of 125M     21.8M of 100M   

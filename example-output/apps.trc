@@ -1,0 +1,33 @@
+
+VERSION:
+6.1.2-80182c4
+
+Getting apps in org example-org / space example-space as admin...
+
+REQUEST: [2014-05-30T14:16:00-07:00]
+GET /v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/summary HTTP/1.1
+Host: api.staging.cf-app.com
+Accept: application/json
+Authorization: [PRIVATE DATA HIDDEN]
+Content-Type: application/json
+User-Agent: go-cli 6.1.2-80182c4 / darwin
+
+
+
+RESPONSE: [2014-05-30T14:16:01-07:00]
+HTTP/1.1 200 OK
+Content-Length: 2407
+Connection: keep-alive
+Content-Type: application/json;charset=utf-8
+Date: Fri, 30 May 2014 21:16:01 GMT
+Server: nginx
+X-Content-Type-Options: nosniff
+X-Vcap-Request-Id: bf4f0544-b0a3-4638-6a90-4b17547334f2::dda2549f-59cc-43d4-baba-70bcc4de43e1
+
+{"guid":"2f6ee8ad-0494-4eff-b12f-197aad08f75c","name":"example-space","apps":[{"guid":"7189330c-ce5e-4db5-b8dc-46c960f9f44b","urls":["dorahost.staging.cf-app.com"],"routes":[{"guid":"d740f8f1-b3f0-4457-85f0-918c774b8d01","host":"dorahost","domain":{"guid":"a5be223f-d298-457c-b5ac-d1ef290a4162","name":"staging.cf-app.com"}}],"service_count":1,"service_names":["not-service"],"running_instances":1,"name":"dora","production":false,"space_guid":"2f6ee8ad-0494-4eff-b12f-197aad08f75c","stack_guid":"71bef9c4-d495-4aa8-93a9-bd42728e4045","buildpack":null,"detected_buildpack":"Ruby/Rack","environment_json":{},"memory":127,"instances":1,"disk_quota":127,"state":"STARTED","version":"412639a0-4757-49e8-b12d-c6813f872a5f","command":null,"console":false,"debug":null,"staging_task_id":"76029f4f5b4e48239e62d1f1e50c920c","package_state":"STAGED","health_check_timeout":null},{"guid":"ebe4b183-ba4e-4378-bf32-55f5b3ae1c80","urls":["nodeHost.staging.cf-app.com"],"routes":[{"guid":"17ad6177-a51b-46dc-b994-61a6d431ac1f","host":"nodeHost","domain":{"guid":"a5be223f-d298-457c-b5ac-d1ef290a4162","name":"staging.cf-app.com"}}],"service_count":0,"service_names":[],"running_instances":2,"name":"helloNode","production":false,"space_guid":"2f6ee8ad-0494-4eff-b12f-197aad08f75c","stack_guid":"71bef9c4-d495-4aa8-93a9-bd42728e4045","buildpack":"nodejs_buildpack","detected_buildpack":null,"environment_json":{"ENVVAR":"ENVVAL"},"memory":125,"instances":2,"disk_quota":100,"state":"STARTED","version":"8a221424-81aa-4464-822e-fd823b67d839","command":"node app.js","console":false,"debug":null,"staging_task_id":"241445eeeca54a84a1fad245785eed61","package_state":"STAGED","health_check_timeout":100},{"guid":"ac6dc245-dced-4eb4-b59a-ee985d93954b","urls":[],"routes":[],"service_count":0,"service_names":[],"running_instances":1,"name":"otherNode","production":false,"space_guid":"2f6ee8ad-0494-4eff-b12f-197aad08f75c","stack_guid":"71bef9c4-d495-4aa8-93a9-bd42728e4045","buildpack":"nodejs_buildpack","detected_buildpack":null,"environment_json":{},"memory":121,"instances":1,"disk_quota":104,"state":"STARTED","version":"26b5483d-ff7b-43ee-a176-825a37d2a549","command":"node app.js","console":false,"debug":null,"staging_task_id":"4a05df5f6d424a1191cea5ba03c1c00f","package_state":"STAGED","health_check_timeout":null}],"services":[{"guid":"49a4fbd6-b8bc-490f-b1e3-e05a859c23fd","name":"not-service","bound_app_count":1}]}
+OK
+
+name        requested state   instances   memory   disk   urls   
+dora        started           1/1         127M     127M   dorahost.staging.cf-app.com   
+helloNode   started           2/2         125M     100M   nodeHost.staging.cf-app.com   
+otherNode   started           1/1         121M     104M      

@@ -1,0 +1,189 @@
+
+VERSION:
+6.1.2-80182c4
+
+
+REQUEST: [2014-05-30T14:27:02-07:00]
+GET /v2/organizations?q=name%3Aexample-org&inline-relations-depth=1 HTTP/1.1
+Host: api.staging.cf-app.com
+Accept: application/json
+Authorization: [PRIVATE DATA HIDDEN]
+Content-Type: application/json
+User-Agent: go-cli 6.1.2-80182c4 / darwin
+
+
+
+RESPONSE: [2014-05-30T14:27:03-07:00]
+HTTP/1.1 200 OK
+Content-Length: 7481
+Connection: keep-alive
+Content-Type: application/json;charset=utf-8
+Date: Fri, 30 May 2014 21:27:03 GMT
+Server: nginx
+X-Content-Type-Options: nosniff
+X-Vcap-Request-Id: 0e91014c-ce47-467d-5dae-037c5a7b0a3c::c0b23ea3-e267-48e1-a300-873f154639ad
+
+{
+  "total_results": 1,
+  "total_pages": 1,
+  "prev_url": null,
+  "next_url": null,
+  "resources": [
+    {
+      "metadata": {
+        "guid": "3c51411d-dd2f-45e3-b9c3-17029783d775",
+        "url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775",
+        "created_at": "2014-05-20T22:55:58+00:00",
+        "updated_at": "2014-05-20T23:00:03+00:00"
+      },
+      "entity": {
+        "name": "example-org",
+        "billing_enabled": false,
+        "quota_definition_guid": "5cbc8c9f-0962-4c0e-a62e-9334c25aae43",
+        "status": "active",
+        "quota_definition_url": "/v2/quota_definitions/5cbc8c9f-0962-4c0e-a62e-9334c25aae43",
+        "quota_definition": {
+          "metadata": {
+            "guid": "5cbc8c9f-0962-4c0e-a62e-9334c25aae43",
+            "url": "/v2/quota_definitions/5cbc8c9f-0962-4c0e-a62e-9334c25aae43",
+            "created_at": "2014-04-24T23:10:17+00:00",
+            "updated_at": null
+          },
+          "entity": {
+            "name": "paid",
+            "non_basic_services_allowed": true,
+            "total_services": -1,
+            "total_routes": 1000,
+            "memory_limit": 10240,
+            "trial_db_allowed": false
+          }
+        },
+        "spaces_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/spaces",
+        "spaces": [
+          {
+            "metadata": {
+              "guid": "2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+              "url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+              "created_at": "2014-05-20T22:56:51+00:00",
+              "updated_at": null
+            },
+            "entity": {
+              "name": "example-space",
+              "organization_guid": "3c51411d-dd2f-45e3-b9c3-17029783d775",
+              "organization_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775",
+              "developers_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/developers",
+              "managers_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/managers",
+              "auditors_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/auditors",
+              "apps_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/apps",
+              "routes_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/routes",
+              "domains_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/domains",
+              "service_instances_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/service_instances",
+              "app_events_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/app_events",
+              "events_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c/events"
+            }
+          }
+        ],
+        "domains_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/domains",
+        "domains": [
+          {
+            "metadata": {
+              "guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+              "url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+              "created_at": "2014-04-24T23:10:18+00:00",
+              "updated_at": "2014-05-27T11:02:22+00:00"
+            },
+            "entity": {
+              "name": "staging.cf-app.com"
+            }
+          }
+        ],
+        "private_domains_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/private_domains",
+        "private_domains": [
+
+        ],
+        "users_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/users",
+        "users": [
+          {
+            "metadata": {
+              "guid": "9ae7cca5-a3fe-452a-84e4-3fc2cab3575a",
+              "url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a",
+              "created_at": "2014-05-20T16:56:08+00:00",
+              "updated_at": null
+            },
+            "entity": {
+              "admin": false,
+              "active": false,
+              "default_space_guid": null,
+              "spaces_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/spaces",
+              "organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/organizations",
+              "managed_organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/managed_organizations",
+              "billing_managed_organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/billing_managed_organizations",
+              "audited_organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/audited_organizations",
+              "managed_spaces_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/managed_spaces",
+              "audited_spaces_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/audited_spaces"
+            }
+          },
+          {
+            "metadata": {
+              "guid": "8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6",
+              "url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6",
+              "created_at": "2014-05-20T16:56:17+00:00",
+              "updated_at": null
+            },
+            "entity": {
+              "admin": false,
+              "active": false,
+              "default_space_guid": null,
+              "spaces_url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6/spaces",
+              "organizations_url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6/organizations",
+              "managed_organizations_url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6/managed_organizations",
+              "billing_managed_organizations_url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6/billing_managed_organizations",
+              "audited_organizations_url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6/audited_organizations",
+              "managed_spaces_url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6/managed_spaces",
+              "audited_spaces_url": "/v2/users/8df775e5-023c-4fd0-ad83-1ca8f1f1c5a6/audited_spaces"
+            }
+          }
+        ],
+        "managers_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/managers",
+        "managers": [
+          {
+            "metadata": {
+              "guid": "9ae7cca5-a3fe-452a-84e4-3fc2cab3575a",
+              "url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a",
+              "created_at": "2014-05-20T16:56:08+00:00",
+              "updated_at": null
+            },
+            "entity": {
+              "admin": false,
+              "active": false,
+              "default_space_guid": null,
+              "spaces_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/spaces",
+              "organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/organizations",
+              "managed_organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/managed_organizations",
+              "billing_managed_organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/billing_managed_organizations",
+              "audited_organizations_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/audited_organizations",
+              "managed_spaces_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/managed_spaces",
+              "audited_spaces_url": "/v2/users/9ae7cca5-a3fe-452a-84e4-3fc2cab3575a/audited_spaces"
+            }
+          }
+        ],
+        "billing_managers_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/billing_managers",
+        "billing_managers": [
+
+        ],
+        "auditors_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/auditors",
+        "auditors": [
+
+        ],
+        "app_events_url": "/v2/organizations/3c51411d-dd2f-45e3-b9c3-17029783d775/app_events"
+      }
+    }
+  ]
+}
+Getting info for org example-org as admin...
+OK
+
+example-org:
+  domains: staging.cf-app.com
+  quota:   paid (10240M memory limit, 1000 routes, -1 services, paid services allowed)
+  spaces:  example-space

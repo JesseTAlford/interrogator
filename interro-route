@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+# Display Commands/dev-mode
+set -x

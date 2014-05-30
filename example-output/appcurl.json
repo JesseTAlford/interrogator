@@ -1,0 +1,44 @@
+{
+   "1": {
+      "state": "RUNNING",
+      "stats": {
+         "name": "helloNode",
+         "uris": [
+            "nodeHost.staging.cf-app.com"
+         ],
+         "host": "10.10.81.25",
+         "port": 61003,
+         "uptime": 291939,
+         "mem_quota": 131072000,
+         "disk_quota": 104857600,
+         "fds_quota": 16384,
+         "usage": {
+            "time": "2014-05-30 21:18:34 +0000",
+            "cpu": 0.0,
+            "mem": 12562432,
+            "disk": 22855680
+         }
+      }
+   },
+   "0": {
+      "state": "RUNNING",
+      "stats": {
+         "name": "helloNode",
+         "uris": [
+            "nodeHost.staging.cf-app.com"
+         ],
+         "host": "10.10.17.33",
+         "port": 61003,
+         "uptime": 291620,
+         "mem_quota": 131072000,
+         "disk_quota": 104857600,
+         "fds_quota": 16384,
+         "usage": {
+            "time": "2014-05-30 21:18:34 +0000",
+            "cpu": 0.0,
+            "mem": 12337152,
+            "disk": 22855680
+         }
+      }
+   }
+}

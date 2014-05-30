@@ -1,0 +1,184 @@
+{
+   "total_results": 11,
+   "total_pages": 1,
+   "prev_url": null,
+   "next_url": null,
+   "resources": [
+      {
+         "metadata": {
+            "guid": "74388c49-5577-4676-b886-87ad04cbcec1",
+            "url": "/v2/routes/74388c49-5577-4676-b886-87ad04cbcec1",
+            "created_at": "2014-04-25T00:28:20+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "dumb-app",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "1af410da-3e40-4510-9694-ea3951d6671a",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/1af410da-3e40-4510-9694-ea3951d6671a",
+            "apps_url": "/v2/routes/74388c49-5577-4676-b886-87ad04cbcec1/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "fa6f3fef-608a-4cd5-9e6f-ed6293c1a632",
+            "url": "/v2/routes/fa6f3fef-608a-4cd5-9e6f-ed6293c1a632",
+            "created_at": "2014-04-25T00:45:11+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "myapp",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "8cc56169-15be-4560-9a8d-f8af9b10d10e",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/8cc56169-15be-4560-9a8d-f8af9b10d10e",
+            "apps_url": "/v2/routes/fa6f3fef-608a-4cd5-9e6f-ed6293c1a632/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "fc72d4c3-8a48-4b5d-876f-e6bbdd911a2a",
+            "url": "/v2/routes/fc72d4c3-8a48-4b5d-876f-e6bbdd911a2a",
+            "created_at": "2014-04-28T19:41:16+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "456709a6-8f22-4cec-56a0-c94958e7fcf8",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "956125d3-05e7-4d00-bb0f-3d1bb9a3ea2f",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/956125d3-05e7-4d00-bb0f-3d1bb9a3ea2f",
+            "apps_url": "/v2/routes/fc72d4c3-8a48-4b5d-876f-e6bbdd911a2a/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "740fe716-7785-4278-aeed-e26f585bd367",
+            "url": "/v2/routes/740fe716-7785-4278-aeed-e26f585bd367",
+            "created_at": "2014-04-28T19:41:50+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "231f1a83-473a-4253-4e6d-2d0d1ff6c64c",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "956125d3-05e7-4d00-bb0f-3d1bb9a3ea2f",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/956125d3-05e7-4d00-bb0f-3d1bb9a3ea2f",
+            "apps_url": "/v2/routes/740fe716-7785-4278-aeed-e26f585bd367/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "c591b6ca-5854-4cf0-b7a2-0115fd49fa4c",
+            "url": "/v2/routes/c591b6ca-5854-4cf0-b7a2-0115fd49fa4c",
+            "created_at": "2014-04-28T19:42:18+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "df4c2998-d0d5-4cce-7e95-8153c92d52ec",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "956125d3-05e7-4d00-bb0f-3d1bb9a3ea2f",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/956125d3-05e7-4d00-bb0f-3d1bb9a3ea2f",
+            "apps_url": "/v2/routes/c591b6ca-5854-4cf0-b7a2-0115fd49fa4c/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "94368d72-5bf1-4738-b385-eac815b89ecf",
+            "url": "/v2/routes/94368d72-5bf1-4738-b385-eac815b89ecf",
+            "created_at": "2014-05-08T08:02:56+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "cats-persistent-app",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "0eed0673-f3d2-4650-a107-553698ab6c88",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/0eed0673-f3d2-4650-a107-553698ab6c88",
+            "apps_url": "/v2/routes/94368d72-5bf1-4738-b385-eac815b89ecf/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "dcd4683d-7163-4267-844f-8a7361394845",
+            "url": "/v2/routes/dcd4683d-7163-4267-844f-8a7361394845",
+            "created_at": "2014-05-15T20:41:45+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "newdora0",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "8cc56169-15be-4560-9a8d-f8af9b10d10e",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/8cc56169-15be-4560-9a8d-f8af9b10d10e",
+            "apps_url": "/v2/routes/dcd4683d-7163-4267-844f-8a7361394845/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "0f679901-82ba-4f38-9057-1a1d93dd4777",
+            "url": "/v2/routes/0f679901-82ba-4f38-9057-1a1d93dd4777",
+            "created_at": "2014-05-16T06:57:50+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "2e2f8e1d-0615-4557-718f-3e936c56498f",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "9865c89e-6ffa-40e9-a2cc-c4d2a4d779c0",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/9865c89e-6ffa-40e9-a2cc-c4d2a4d779c0",
+            "apps_url": "/v2/routes/0f679901-82ba-4f38-9057-1a1d93dd4777/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "c087a6da-214c-4a7f-a608-fe11fecf9bbb",
+            "url": "/v2/routes/c087a6da-214c-4a7f-a608-fe11fecf9bbb",
+            "created_at": "2014-05-17T00:24:07+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "jf-dk-dora",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "8cc56169-15be-4560-9a8d-f8af9b10d10e",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/8cc56169-15be-4560-9a8d-f8af9b10d10e",
+            "apps_url": "/v2/routes/c087a6da-214c-4a7f-a608-fe11fecf9bbb/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "d740f8f1-b3f0-4457-85f0-918c774b8d01",
+            "url": "/v2/routes/d740f8f1-b3f0-4457-85f0-918c774b8d01",
+            "created_at": "2014-05-20T23:01:24+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "dorahost",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+            "apps_url": "/v2/routes/d740f8f1-b3f0-4457-85f0-918c774b8d01/apps"
+         }
+      },
+      {
+         "metadata": {
+            "guid": "17ad6177-a51b-46dc-b994-61a6d431ac1f",
+            "url": "/v2/routes/17ad6177-a51b-46dc-b994-61a6d431ac1f",
+            "created_at": "2014-05-20T23:06:05+00:00",
+            "updated_at": null
+         },
+         "entity": {
+            "host": "nodeHost",
+            "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_guid": "2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+            "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+            "space_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+            "apps_url": "/v2/routes/17ad6177-a51b-46dc-b994-61a6d431ac1f/apps"
+         }
+      }
+   ]
+}
