@@ -4,7 +4,7 @@
 set -e
 
 # Display Commands/dev-mode
-set -x
+# set -x
 
 # Take host and login information as arguments:
 HOST=$1
@@ -16,10 +16,36 @@ PASSWORD=$3
 export CF_HOME=~/tmp/interroroute
 
 # login with admin credentials
-cf auth 
+##cf auth 
 
 # create routes.json
-cf curl /v2/routes > ~/tmp/interroroute/routes.json
+##cf curl /v2/routes > ~/tmp/interroroute/routes.json
 
-# pull out only routes with the selected hostname
-jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-route.json
+#stub of above for development tests:
+touch ~/tmp/interroroute/routes.json
+cp ~/workspace/interrogator/example-output/routes.json ~/tmp/interroroute/routes.json
+
+# pull out an array of hosts with the given host name
+jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-routes.json
+
+# get a signle entity
+jq '.[0].entity' ~/tmp/interroroute/target-routes.json > $CF_HOME/single-entity.json
+
+# assign URLs for curling
+URLAPPS=$(jq '.apps_url' ~/tmp/interroroute/single-entity.json)
+URLSPACE=$(jq '.space_url' ~/tmp/interroroute/single-entity.json)
+URLDOMAIN=$(jq '.domain_url' ~/tmp/interroroute/single-entity.json)
+
+# get the things actual names, and the org
+##APPS = $(cf curl $URLAPPS | jq '.')
+##SPACE = $(cf curl $URLSPACE | jq '.')
+##ORG = $(cf curl $URLSPACE | jq '.entity | .organization_url' | cf curl | jq '.entity | .name')
+##DOMAIN = $(cf curl $URLDOMAIN | jq '.')
+
+# stub of the above for development tests:
+echo $URLAPPS
+echo $URLSPACE
+echo $URLDOMAIN
+
+# logout the admin user
+##cf logout
