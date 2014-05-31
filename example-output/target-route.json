@@ -1,0 +1,18 @@
+[
+  {
+    "entity": {
+      "apps_url": "/v2/routes/17ad6177-a51b-46dc-b994-61a6d431ac1f/apps",
+      "space_url": "/v2/spaces/2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+      "domain_url": "/v2/domains/a5be223f-d298-457c-b5ac-d1ef290a4162",
+      "space_guid": "2f6ee8ad-0494-4eff-b12f-197aad08f75c",
+      "domain_guid": "a5be223f-d298-457c-b5ac-d1ef290a4162",
+      "host": "nodeHost"
+    },
+    "metadata": {
+      "updated_at": null,
+      "created_at": "2014-05-20T23:06:05+00:00",
+      "url": "/v2/routes/17ad6177-a51b-46dc-b994-61a6d431ac1f",
+      "guid": "17ad6177-a51b-46dc-b994-61a6d431ac1f"
+    }
+  }
+]

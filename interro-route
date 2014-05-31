@@ -5,3 +5,21 @@ set -e
 
 # Display Commands/dev-mode
 set -x
+
+# Take host and login information as arguments:
+HOST=$1
+USERNAME=$2
+PASSWORD=$3
+
+
+# Set CF to use a seperate config file 
+export CF_HOME=~/tmp/interroroute
+
+# login with admin credentials
+cf auth 
+
+# create routes.json
+cf curl /v2/routes > ~/tmp/interroroute/routes.json
+
+# pull out only routes with the selected hostname
+jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-route.json
