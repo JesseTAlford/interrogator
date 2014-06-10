@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit on error
-set -e
+#set -e
 
 # Display Commands/dev-mode
 # set -x
@@ -9,7 +9,7 @@ set -e
 # Take host as an argument:
 HOST=$1
 
-#Get target and login information from environment.
+# Get target and login information from environment.
 # Idea for the future: consume stub directly?
 USERNAME=$ADMIN_USERNAME
 PASSWORD=$ADMIN_PASSWORD
@@ -19,37 +19,43 @@ API=$CF_API
 export CF_HOME=~/tmp/interroroute
 
 # login with admin credentials
-cf api $API
-cf auth $USERNAME $PASSWORD
+cf api $API > /dev/null
+cf auth $USERNAME $PASSWORD > /dev/null
 
 # create routes.json
-##cf curl /v2/routes > ~/tmp/interroroute/routes.json
+cf curl /v2/routes > ~/tmp/interroroute/routes.json
 
-#stub of above for development tests:
-touch ~/tmp/interroroute/routes.json
-cp ~/workspace/interrogator/example-output/routes.json ~/tmp/interroroute/routes.json
+# stub of above for development tests:
+## touch ~/tmp/interroroute/routes.json
+## cp ~/workspace/interrogator/example-output/routes.json ~/tmp/interroroute/routes.json
 
 # pull out an array of hosts with the given host name
 jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-routes.json
+
+### NOTE: This is the section that needs to go inside an iterator in the case of multiple matches.
 
 # get a signle entity
 jq '.[0].entity' ~/tmp/interroroute/target-routes.json > $CF_HOME/single-entity.json
 
 # assign URLs for curling
-URLAPPS=$(jq '.apps_url' ~/tmp/interroroute/single-entity.json)
-URLSPACE=$(jq '.space_url' ~/tmp/interroroute/single-entity.json)
-URLDOMAIN=$(jq '.domain_url' ~/tmp/interroroute/single-entity.json)
+APPS_URL=$(jq '.apps_url' ~/tmp/interroroute/single-entity.json | sed -e 's/^"//'  -e 's/"$//')
+SPACE_URL=$(jq '.space_url' ~/tmp/interroroute/single-entity.json | sed -e 's/^"//'  -e 's/"$//')
+DOMAIN_URL=$(jq '.domain_url' ~/tmp/interroroute/single-entity.json | sed -e 's/^"//'  -e 's/"$//')
+ORG_URL=$(cf curl $SPACE_URL | jq '.entity | .organization_url' | sed -e 's/^"//'  -e 's/"$//')
 
 # get the things actual names, and the org
-##APPS = $(cf curl $URLAPPS | jq '.')
-##SPACE = $(cf curl $URLSPACE | jq '.')
-##ORG = $(cf curl $URLSPACE | jq '.entity | .organization_url' | cf curl | jq '.entity | .name')
-##DOMAIN = $(cf curl $URLDOMAIN | jq '.')
+APPS=$(cf curl $APPS_URL | jq '.resources | .[0] | .entity | .name' -r)
+### Note: this only yeilds the first such app, needs to be expanded to iterate.
+SPACE=$(cf curl $SPACE_URL | jq '.entity | .name' -r)
+ORG=$(cf curl $ORG_URL | jq '.entity | .name' -r)
+DOMAIN=$(cf curl $DOMAIN_URL | sed '$d' | jq '.entity | .name' -r)
 
-# stub of the above for development tests:
-echo $URLAPPS
-echo $URLSPACE
-echo $URLDOMAIN
+# output results
+echo "Apps: $APPS"
+echo "Space: $SPACE"
+echo "Org: $ORG"
+echo "Domain: $DOMAIN"
+
 
 # logout the admin user
-##cf logout
+# cf logout
