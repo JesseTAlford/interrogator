@@ -1,22 +1,22 @@
 #!/bin/bash
 
 # Exit on error
-#set -e
+set -e
 
-# Display Commands/dev-mode
+# Display Commands/"demonstrator-mode"
 # set -x
 
 # Take host as an argument:
 HOST=$1
 
 # Get target and login information from environment.
-# Idea for the future: consume stub directly?
-USERNAME=$ADMIN_USERNAME
-PASSWORD=$ADMIN_PASSWORD
+# Idea for the future: option to consume stub directly? This is CloudOps, basically.
+USERNAME=$CF_USERNAME
+PASSWORD=$CF_PASSWORD
 API=$CF_API
 
 # Set CF to use a seperate config file 
-export CF_HOME=~/tmp/interroroute
+CF_HOME=~/tmp/interroroute
 
 # login with admin credentials
 cf api $API > /dev/null
@@ -25,37 +25,35 @@ cf auth $USERNAME $PASSWORD > /dev/null
 # create routes.json
 cf curl /v2/routes > ~/tmp/interroroute/routes.json
 
-# stub of above for development tests:
-## touch ~/tmp/interroroute/routes.json
-## cp ~/workspace/interrogator/example-output/routes.json ~/tmp/interroroute/routes.json
-
 # pull out an array of hosts with the given host name
 jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-routes.json
 
 ### NOTE: This is the section that needs to go inside an iterator in the case of multiple matches.
+### alternatively, could make multiple matches impossible by specifying domain, too.
+### (Careful not to get too clever. "Domains" don't have to be top level, and hosts don't have to be just a sub-domain.)
 
 # get a signle entity
 jq '.[0].entity' ~/tmp/interroroute/target-routes.json > $CF_HOME/single-entity.json
 
 # assign URLs for curling
-APPS_URL=$(jq '.apps_url' ~/tmp/interroroute/single-entity.json | sed -e 's/^"//'  -e 's/"$//')
-SPACE_URL=$(jq '.space_url' ~/tmp/interroroute/single-entity.json | sed -e 's/^"//'  -e 's/"$//')
-DOMAIN_URL=$(jq '.domain_url' ~/tmp/interroroute/single-entity.json | sed -e 's/^"//'  -e 's/"$//')
-ORG_URL=$(cf curl $SPACE_URL | jq '.entity | .organization_url' | sed -e 's/^"//'  -e 's/"$//')
+APPS_URL=$(jq '.apps_url' ~/tmp/interroroute/single-entity.json -r)
+SPACE_URL=$(jq '.space_url' ~/tmp/interroroute/single-entity.json -r)
+DOMAIN_URL=$(jq '.domain_url' ~/tmp/interroroute/single-entity.json -r)
+ORG_URL=$(cf curl $SPACE_URL | jq '.entity | .organization_url' -r)
 
 # get the things actual names, and the org
 APPS=$(cf curl $APPS_URL | jq '.resources | .[0] | .entity | .name' -r)
-### Note: this only yeilds the first such app, needs to be expanded to iterate.
+### Note: the above only yeilds the first such app, needs to be expanded to iterate.
 SPACE=$(cf curl $SPACE_URL | jq '.entity | .name' -r)
 ORG=$(cf curl $ORG_URL | jq '.entity | .name' -r)
 DOMAIN=$(cf curl $DOMAIN_URL | sed '$d' | jq '.entity | .name' -r)
+### Note: sed in above line to scrub deprecation warning, which otherwise provokes a failure from jq.
 
 # output results
-echo "Apps: $APPS"
+echo "App: $APPS"
 echo "Space: $SPACE"
 echo "Org: $ORG"
 echo "Domain: $DOMAIN"
 
-
 # logout the admin user
-# cf logout
+cf logout > /dev/null
