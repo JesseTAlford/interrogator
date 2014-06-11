@@ -12,11 +12,16 @@ ORG=$2
 SPACE=$3
 
 # Set CF to use a seperate config file 
-export CF_HOME=/tmp/interrogator
+CF_HOME=/tmp/interrogator
 
-# Login and target the app's space
-cf api api.staging.cf-app.com > /dev/null
-cf auth interrogator interrogator > /dev/null
+# Get target and login information from environment.
+USERNAME=$CF_USERNAME
+PASSWORD=$CF_PASSWORD
+API=$CF_API
+
+# Login and target the app's space (and discard cf's chattiness)
+cf api $API > /dev/null
+cf auth $USERNAME $PASSWORD > /dev/null
 cf target -o $ORG -s $SPACE > /dev/null
 
 # Get the app's name, instances, quota, and routes
