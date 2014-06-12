@@ -12,7 +12,7 @@ ORG=$2
 SPACE=$3
 
 # Set CF to use a seperate config file 
-CF_HOME=/tmp/interrogator
+export CF_HOME=~/tmp/interrogator/
 
 # Get target and login information from environment.
 USERNAME=$CF_USERNAME
@@ -26,28 +26,28 @@ cf target -o $ORG -s $SPACE > /dev/null
 
 # Get the app's name, instances, quota, and routes
 # and store them as json
-CF_TRACE=true cf app $NAME | grep ',"name":' > /tmp/interrogator/app.json
+CF_TRACE=true cf app $NAME | grep ',"name":' > ~/tmp/interrogator/app.json
 
 # Assign them to env vars
 # Core Maifest Attributes:
-INTERROGATOR_APP_NAME=$(jq -r '.name' /tmp/interrogator/app.json)
+INTERROGATOR_APP_NAME=$(jq -r '.name' ~/tmp/interrogator/app.json)
 # Saved for posterity so you can see how insane this was before going after the JSON:
-# INTERROGATOR_INSTANCES=$(grep instances: /tmp/interrogator/interrogator_cf_app_with_trace.txt | awk '{print substr ($0,length,1)}')
+# INTERROGATOR_INSTANCES=$(grep instances: ~/tmp/interrogator/interrogator_cf_app_with_trace.txt | awk '{print substr ($0,length,1)}')
 # Now the sane way:
-INTERROGATOR_INSTANCES=$(jq '.instances' /tmp/interrogator/app.json)
-INTERROGATOR_MEMORY=$(jq '.memory' /tmp/interrogator/app.json)
-INTERROGATOR_DISK=$(jq '.disk_quota' /tmp/interrogator/app.json)
-INTERROGATOR_HOST=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .host')
-INTERROGATOR_DOMAIN=$(jq '.routes' /tmp/interrogator/app.json | jq '.[0] | .domain.name')
+INTERROGATOR_INSTANCES=$(jq '.instances' ~/tmp/interrogator/app.json)
+INTERROGATOR_MEMORY=$(jq '.memory' ~/tmp/interrogator/app.json)
+INTERROGATOR_DISK=$(jq '.disk_quota' ~/tmp/interrogator/app.json)
+INTERROGATOR_HOST=$(jq '.routes' ~/tmp/interrogator/app.json | jq '.[0] | .host')
+INTERROGATOR_DOMAIN=$(jq '.routes' ~/tmp/interrogator/app.json | jq '.[0] | .domain.name')
 
 # Optional Manifest Attributes:
-INTERROGATOR_COMMAND=$(jq '.command' /tmp/interrogator/app.json)
-INTERROGATOR_BUILDPACK=$(jq '.buildpack' /tmp/interrogator/app.json)
-INTERROGATOR_TIMEOUT=$(jq '.health_check_timeout' /tmp/interrogator/app.json)
-INTERROGATOR_SERVICES=$(jq '.services' /tmp/interrogator/app.json | jq '.[0] | .name')
+INTERROGATOR_COMMAND=$(jq '.command' ~/tmp/interrogator/app.json)
+INTERROGATOR_BUILDPACK=$(jq '.buildpack' ~/tmp/interrogator/app.json)
+INTERROGATOR_TIMEOUT=$(jq '.health_check_timeout' ~/tmp/interrogator/app.json)
+INTERROGATOR_SERVICES=$(jq '.services' ~/tmp/interrogator/app.json | jq '.[0] | .name')
 
 # Initialize a manifest file and write the app details to it
-INTERROGATOR_MANIFEST=/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
+INTERROGATOR_MANIFEST=~/tmp/interrogator/$INTERROGATOR_APP_NAME-manifest.yml
 #Core manifest attributes:
 echo '---' > $INTERROGATOR_MANIFEST
 echo 'applications:' >> $INTERROGATOR_MANIFEST
