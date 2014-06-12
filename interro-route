@@ -1,47 +1,52 @@
 #!/bin/bash
 
-# Exit on error
+# Exit on error.
 set -e
 
-# Display Commands/"demonstrator-mode"
-# set -x
+# Display Commands/"demonstrator-mode."
+#set -x
 
 # Take host as an argument:
 HOST=$1
 
-# Get target and login information from environment.
-# Idea for the future: option to consume stub directly? This is CloudOps, basically.
+# Set CF to use a seperate config file so as to avoid interfereing with normal login/target.
+# NB: This also causes cf to create the ~/tmp/interroroute path if it doesn't already exist.
+# This is useful in this case, but might be surprising if ~/tmp/ didn't previously exist.
+CF_HOME=~/tmp/interroroute
+
+# Get target from environment.
 USERNAME=$CF_USERNAME
 PASSWORD=$CF_PASSWORD
 API=$CF_API
 
-# Set CF to use a seperate config file 
-CF_HOME=~/tmp/interroroute
-
-# login with admin credentials
+# Login with credentials from env.
 cf api $API > /dev/null
 cf auth $USERNAME $PASSWORD > /dev/null
 
-# create routes.json
+# Get routes data from cloud controller save it as a temp file.
 cf curl /v2/routes > ~/tmp/interroroute/routes.json
 
-# pull out an array of hosts with the given host name
+# Pull out an array of hosts with the given host name and save them as a temp file.
 jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-routes.json
 
-### NOTE: This is the section that needs to go inside an iterator in the case of multiple matches.
-### alternatively, could make multiple matches impossible by specifying domain, too.
-### (Careful not to get too clever. "Domains" don't have to be top level, and hosts don't have to be just a sub-domain.)
+### NOTE: Below is the section that needs to go inside an iterator in the case of multiple matches.
+### Alternatively, could make multiple matches impossible by specifying domain, too.
+### (Careful not to get too clever. "Domains" don't have to be top level.
+### The URL bs.srsly.trrble.io can exist as domain "srsly.trrble.io" 
+### plus hostname "bs" OR as domain "bs.srsly.trrble.io" with no hostname.
+### Or both! Though, it can't be both in the case of a shared domain,
+### so the really stupid "both!" scenario is at least constrained to a single org.)
 
-# get a signle entity
+# Get a signle entity.
 jq '.[0].entity' ~/tmp/interroroute/target-routes.json > $CF_HOME/single-entity.json
 
-# assign URLs for curling
+# assign URLs for curling (and, you know, curl a little to accomplish that, in ORG_URL's case).
 APPS_URL=$(jq '.apps_url' ~/tmp/interroroute/single-entity.json -r)
 SPACE_URL=$(jq '.space_url' ~/tmp/interroroute/single-entity.json -r)
 DOMAIN_URL=$(jq '.domain_url' ~/tmp/interroroute/single-entity.json -r)
 ORG_URL=$(cf curl $SPACE_URL | jq '.entity | .organization_url' -r)
 
-# get the things actual names, and the org
+# Get the things' actual names
 APPS=$(cf curl $APPS_URL | jq '.resources | .[0] | .entity | .name' -r)
 ### Note: the above only yeilds the first such app, needs to be expanded to iterate.
 SPACE=$(cf curl $SPACE_URL | jq '.entity | .name' -r)
