@@ -4,7 +4,7 @@
 set -e
 
 # Display Commands/"demonstrator-mode."
-#set -x
+# set -x
 
 # Take host as an argument:
 HOST=$1
@@ -12,7 +12,7 @@ HOST=$1
 # Set CF to use a seperate config file so as to avoid interfereing with normal login/target.
 # NB: This also causes cf to create the ~/tmp/interroroute path if it doesn't already exist.
 # This is useful in this case, but might be surprising if ~/tmp/ didn't previously exist.
-CF_HOME=~/tmp/interroroute
+export CF_HOME=~/tmp/interroroute
 
 # Get target from environment.
 USERNAME=$CF_USERNAME
@@ -23,11 +23,14 @@ API=$CF_API
 cf api $API > /dev/null
 cf auth $USERNAME $PASSWORD > /dev/null
 
-# Get routes data from cloud controller save it as a temp file.
-cf curl /v2/routes > ~/tmp/interroroute/routes.json
+# Get routes data for the given host from cloud controller save it as a temp file.
+cf curl "/v2/routes?q=host%3A${HOST}" > ~/tmp/interroroute/target-routes.json
 
-# Pull out an array of hosts with the given host name and save them as a temp file.
-jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-routes.json
+# Pull out an array of hosts with the given host name and save them as a temp file. SEE NOTE
+# This whole section is unecessary now. I'm leaving it here to remind myself how I previously did this.
+# The curl above used to go to routes.json instead of directly to target-routes. 
+# I'll probably clean this whole section out once I'm actually comfortable with how this works.
+## jq ".resources | map(select(.entity.host == \"${HOST}\"))" ~/tmp/interroroute/routes.json > ~/tmp/interroroute/target-routes.json
 
 ### NOTE: Below is the section that needs to go inside an iterator in the case of multiple matches.
 ### Alternatively, could make multiple matches impossible by specifying domain, too.
@@ -37,8 +40,8 @@ jq '.resources | map(select(.entity.host == "nodeHost"))' ~/tmp/interroroute/rou
 ### Or both! Though, it can't be both in the case of a shared domain,
 ### so the really stupid "both!" scenario is at least constrained to a single org.)
 
-# Get a signle entity.
-jq '.[0].entity' ~/tmp/interroroute/target-routes.json > $CF_HOME/single-entity.json
+# Get a single entity.
+jq '.resources | .[0].entity' ~/tmp/interroroute/target-routes.json > $CF_HOME/single-entity.json
 
 # assign URLs for curling (and, you know, curl a little to accomplish that, in ORG_URL's case).
 APPS_URL=$(jq '.apps_url' ~/tmp/interroroute/single-entity.json -r)
@@ -53,6 +56,7 @@ SPACE=$(cf curl $SPACE_URL | jq '.entity | .name' -r)
 ORG=$(cf curl $ORG_URL | jq '.entity | .name' -r)
 DOMAIN=$(cf curl $DOMAIN_URL | sed '$d' | jq '.entity | .name' -r)
 ### Note: sed in above line to scrub deprecation warning, which otherwise provokes a failure from jq.
+### of course, if the json is empty when it gets here, the sed ruins its validity.
 
 # output results
 echo "App: $APPS"
