@@ -60,8 +60,8 @@ DOMAIN=$(cf curl $DOMAIN_URL | sed '$d' | jq '.entity | .name' -r)
 
 # output results
 echo "App: $APPS"
-echo "Space: $SPACE"
 echo "Org: $ORG"
+echo "Space: $SPACE"
 echo "Domain: $DOMAIN"
 
 # logout the admin user
